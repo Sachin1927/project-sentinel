@@ -20,8 +20,7 @@ lightgbm>=4.1.0             # Alternative to XGBoost (Optional but good to have)
 transformers>=4.35.0        # NLP for Sentiment Analysis
 torch>=2.1.0                # Backend for Transformers
 
-# --- MLOps & Tracking ---
-mlflow>=2.8.0               # Experiment tracking (Optional future use)
+# --- MLOps & Tracking ---             
 evidently>=0.4.0            # Drift detection (Optional future use)
 
 # --- Explainability (XAI) ---
