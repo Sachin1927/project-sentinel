@@ -50,6 +50,10 @@ class CustomerData(BaseModel):
 
 app = FastAPI(title="Sentinel Churn Predictor", version="1.2")
 
+# --- HEALTH CHECK ENDPOINT (The fix for your test) ---
+@app.get("/")
+def health_check():
+    return {"status": "online", "message": "Sentinel API is running"}
 @app.post("/predict_churn")
 def predict(data: CustomerData):
     try:
