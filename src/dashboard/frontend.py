@@ -67,26 +67,30 @@ if st.button("Assess Churn Risk"):
             st.progress(probability)
             
             # --- 2. Explainability (New Section) ---
-            st.subheader("Why did the AI make this decision?")
-            st.caption("Positive values (Red) increase risk. Negative values (Blue) decrease risk.")
+            st.subheader("🤖 Why did the AI make this decision?")
             
-            # Convert dictionary to DataFrame for plotting
-            shap_df = pd.DataFrame(list(explanation.items()), columns=['Feature', 'Impact'])
-            
-            # Sort by absolute impact (show most important first)
-            shap_df['Abs_Impact'] = shap_df['Impact'].abs()
-            shap_df = shap_df.sort_values('Abs_Impact', ascending=False).drop(columns=['Abs_Impact'])
-            
-            # Custom Bar Chart
-            st.bar_chart(shap_df.set_index('Feature'))
-            
-            # Narrative Explanation
-            top_factor = shap_df.iloc[0]
-            action = "increasing" if top_factor['Impact'] > 0 else "decreasing"
-            st.markdown(f"**Key Insight:** The main factor is **{top_factor['Feature']}**, which is **{action}** the risk.")
-
-        else:
-            st.error("Error: Could not connect to prediction engine.")
+            # CHECK: Do we actually have an explanation?
+            if explanation and "error" not in explanation:
+                st.caption("Positive values (Red) increase risk. Negative values (Blue) decrease risk.")
+                
+                # Convert dictionary to DataFrame for plotting
+                shap_df = pd.DataFrame(list(explanation.items()), columns=['Feature', 'Impact'])
+                
+                # Sort by absolute impact
+                shap_df['Abs_Impact'] = shap_df['Impact'].abs()
+                shap_df = shap_df.sort_values('Abs_Impact', ascending=False).drop(columns=['Abs_Impact'])
+                
+                # Custom Bar Chart
+                st.bar_chart(shap_df.set_index('Feature'))
+                
+                # Narrative Explanation (Safe Check)
+                if not shap_df.empty:
+                    top_factor = shap_df.iloc[0]
+                    action = "increasing" if top_factor['Impact'] > 0 else "decreasing"
+                    st.markdown(f"**Key Insight:** The main factor is **{top_factor['Feature']}**, which is **{action}** the risk.")
+            else:
+                # Fallback if SHAP is disabled
+                st.info("ℹ️ Detailed AI explanation is currently unavailable (SHAP engine is offline).")
             
     except Exception as e:
         st.error(f"Connection Error: {e}")
