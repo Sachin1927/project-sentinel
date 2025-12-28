@@ -35,7 +35,7 @@ data/feature_store/data/
 # --- Model Artifacts ---
 # Models are binary blobs (large). 
 # In production, these go to S3/Azure Blob Storage, not GitHub.
-models/production/*.joblib
+#models/production/*.joblib
 models/staging/*.joblib
 
 # --- Testing & Logs ---
