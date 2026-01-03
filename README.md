@@ -1,5 +1,5 @@
 # 🛡️ Real-Time Customer Retention & Intervention Engine
-![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://project-sentinel-bwkl4skheyvmajespdxizo.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://project-sentinel-bwkl4skheyvmajespdxizo.streamlit.app/)]
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi)
